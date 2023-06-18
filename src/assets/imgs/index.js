@@ -1,0 +1,1 @@
+export { default as UEF_LOGO } from '../imgs/UEF_Logo.jpg'
