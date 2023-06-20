@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: scale(16)
     },
     logo: {
-        height: scale(400),
+        height: scale(300),
         alignItems: 'center',
         justifyContent: 'center'
     },

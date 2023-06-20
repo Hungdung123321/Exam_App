@@ -1,11 +1,8 @@
 export const COLORS = {
     WHITE: '#FFFFFF',
     BLACK: '#000000',
-    GRAY: '#AFB1B6',
-    GRAY_LIGHT: '#8F959E',
+    BLACK_OLIVE: '#3E3E3E',
+    PHILIPPINE_SLIVER: '#B6B6B6',
+    OUTER_SPACE: '#454544',
     TRANSPARENT: 'transparent',
-    LIGHT_GREEN: 'rgba(43, 125, 136, 0.40)',
-    GREEN: 'rgba(15, 166, 157, 1)',
-    BLUE: '#0066B1',
-    BLUE_DARK: '#267DBB'
 };

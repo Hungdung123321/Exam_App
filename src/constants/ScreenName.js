@@ -1,5 +1,6 @@
 export const SCREEN_NAME = {
     HOME: 'Home',
     DETAIL: 'Detail',
-    LOGIN: 'Login'
+    LOGIN: 'Login',
+    CREAT_ACCOUNT: 'CreatAccount'
 }

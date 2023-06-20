@@ -2,6 +2,7 @@ import { TouchableOpacity } from 'react-native'
 import React from 'react'
 import styles from './style'
 import AppText from '../AppText';
+import AppView from '../AppView';
 
 const AppButton = ({
     content,
@@ -22,10 +23,10 @@ const AppButton = ({
                 return <AppText style={style}>{content}</AppText>;
 
             case 'function':
-                return <AppText style={style}>{content?.()}</AppText>;
+                return <AppView style={style}>{content?.()}</AppView>;
 
             default:
-                return <AppText />;
+                return <AppView />;
         }
     };
 
