@@ -7,10 +7,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: COLORS.WHITE,
-        paddingHorizontal: scale(16)
+        paddingHorizontal: scale(16),
     },
     logo: {
-        height: scale(300),
+        height: scale(272),
         alignItems: 'center',
         justifyContent: 'center'
     },

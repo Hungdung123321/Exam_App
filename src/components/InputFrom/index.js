@@ -1,5 +1,4 @@
-import React from 'react'
-import { Alert } from 'react-native'
+import React, { useState } from 'react'
 import AppView from '../AppView'
 import AppText from '../AppText'
 import { APP_TEXT_TYPE, EMPTY_STRING } from '../../constants/common'
@@ -7,7 +6,31 @@ import styles from './style'
 
 
 const InputForm = (props) => {
-    const { label, onEndEdit, styleInput, placeholder } = props;
+    const {
+        label,
+        setText,
+        styleInput,
+        placeholder,
+        regex = null,
+        invaildMessage
+    } = props;
+    const [validationMessage, setValidationMessage] = useState('');
+
+    const handleEdit = (value) => {
+        setText?.(value.nativeEvent.text)
+        if (regex) {
+            validate(value.nativeEvent.text)
+        }
+    }
+
+    const validate = (text) => {
+        const isValid = regex?.test(text);
+        if (!isValid) {
+            setValidationMessage(invaildMessage);
+        } else {
+            setValidationMessage('');
+        }
+    };
 
     return (
         <AppView style={styles.container}>
@@ -20,8 +43,9 @@ const InputForm = (props) => {
                 style={styleInput}
                 TYPE={APP_TEXT_TYPE.TEXT_INPUT}
                 placeholder={placeholder || EMPTY_STRING}
-                onEndEditing={onEndEdit}
+                onEndEditing={handleEdit}
             />
+            <AppText style={{ color: 'red' }}>{validationMessage}</AppText>
         </AppView>
     )
 }

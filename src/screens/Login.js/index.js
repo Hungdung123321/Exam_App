@@ -23,7 +23,7 @@ const Login = () => {
             .then(res => res.json())
             .then(data => {
                 if (data) {
-                    navigation.navigate(SCREEN_NAME.DETAIL)
+                    navigation.navigate(SCREEN_NAME.HOME_DRAWER)
                 } else {
                     Alert.alert('Mat Khau Ko dung')
                 }
@@ -48,12 +48,12 @@ const Login = () => {
             <InputForm
                 label={'Tài Khoản'}
                 placeholder={'Nhập Tài Khoản'}
-                onEndEdit={(value) => setAccount(value.nativeEvent.text || '')}
+                setText={(text) => setAccount(text)}
             />
             <InputForm
                 label={'Mật Khẩu'}
                 placeholder={'Nhập Mật Khẩu'}
-                onEndEdit={(value) => setPassword(value.nativeEvent.text || '')}
+                setText={(text) => setPassword(text)}
             />
             <AppButton
                 styleButton={styles.LoginBtn}

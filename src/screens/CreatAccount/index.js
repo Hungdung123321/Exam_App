@@ -1,18 +1,30 @@
 import React, { useState } from 'react'
-import { AppButton, AppText, AppView, InputForm } from "../../components"
+import { Alert } from 'react-native'
+import { AppButton, AppView, InputForm } from "../../components"
 import { APP_VIEW_TYPE } from '../../constants/common'
-import styles from './style'
-import { Alert, Image } from 'react-native'
+import { Image } from 'react-native'
 import { IMG_app_Logo } from '../../assets/imgs'
 import { API } from '../../services/RestApi/Api'
+import { useNavigation } from '@react-navigation/native'
+import styles from './style'
 
 const CreatAccount = () => {
 
     const [Account, setAccount] = useState('')
     const [Gmail, setGmail] = useState('')
     const [Password, setPassword] = useState('')
+    const [StudentID, setStudentID] = useState('')
+    const navigation = useNavigation();
+
 
     const HandleCreatAccount = () => {
+        if (
+            Account === '' || Password === '' ||
+            Gmail === '' || StudentID === ''
+        ) {
+            Alert.alert('Chua nhap acc or pass')
+            return;
+        }
         fetch(API, {
             method: 'POST',
             headers: {
@@ -23,8 +35,10 @@ const CreatAccount = () => {
                 account: Account,
                 password: Password,
                 gmail: Gmail,
+                studentId: StudentID
             }),
         });
+        navigation.goBack()
     }
 
     return (
@@ -35,22 +49,26 @@ const CreatAccount = () => {
             <InputForm
                 label={'Nhập Gmail'}
                 placeholder={'Nhập Gmail'}
-                onEndEdit={(value) => setGmail(value.nativeEvent.text || '')}
+                regex={/^[^\s@]+@[^\s@]+\.[^\s@]+$/}
+                invaildMessage={'Please enter a valid email'}
+                setText={(text) => setGmail(text)}
             />
             <InputForm
                 label={'Tài Khoản'}
                 placeholder={'Nhập Tài Khoản'}
-                onEndEdit={(value) => setAccount(value.nativeEvent.text || '')}
+                setText={(text) => setAccount(text)}
             />
             <InputForm
                 label={'Password'}
                 placeholder={'Nhập Mật Khẩu'}
-                onEndEdit={(value) => setPassword(value.nativeEvent.text || '')}
+                setText={(text) => setPassword(text)}
+                regex={/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$/}
+                invaildMessage={'Minimum eight characters, at least one uppercase letter, one lowercase letter and one number:'}
             />
             <InputForm
-                label={'Re-Password'}
-                placeholder={'Nhập Mật Khẩu'}
-                onEndEdit={(value) => setPassword(value.nativeEvent.text || '')}
+                label={'StudentID'}
+                placeholder={'Nhập mã số sinh viên'}
+                setText={(text) => setStudentID(text)}
             />
             <AppButton
                 styleButton={styles.LoginBtn}
