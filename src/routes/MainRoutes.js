@@ -10,8 +10,8 @@ import CreatAccount from '../screens/CreatAccount'
 import CustomDrawer from './CustomDrawer'
 import { Image } from 'react-native'
 import { IC_HomeSidebar, IC_Subjects } from '../assets/icons'
-import styles from './style'
 import { COLORS } from '../constants/colors'
+import styles from './style'
 
 const MainStack = createNativeStackNavigator()
 const Drawer = createDrawerNavigator()
@@ -22,8 +22,8 @@ const HomeDrawer = () => {
             drawerContent={props => <CustomDrawer {...props} />}
             screenOptions={{
                 headerShown: false,
-                drawerLabelStyle: styles.LabelStyle,
                 drawerActiveBackgroundColor: COLORS.MANTIS,
+                drawerLabelStyle: styles.LabelStyle,
                 drawerActiveTintColor: COLORS.WHITE,
                 drawerInactiveTintColor: COLORS.BLACK_COW
             }}

@@ -1,7 +1,7 @@
 import { Text, TextInput } from 'react-native'
 import React from 'react'
-import styles from './style'
 import { APP_TEXT_TYPE } from '../../constants/common'
+import styles from './style'
 
 const AppText = ({ TYPE = APP_TEXT_TYPE.TEXT, children, style, ...rest }) => {
 

@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
 import { Alert, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { AppButton, AppText, AppView, InputForm } from '../../components'
-import { IC_Logo_Google, IMG_app_Logo } from '../../assets/imgs'
-import { APP_VIEW_TYPE } from '../../constants/common'
-import { SCREEN_NAME } from '../../constants/ScreenName'
+import { APP_BUTTON_TYPE, APP_VIEW_TYPE } from '../../constants/common'
 import { API } from '../../services/RestApi/Api'
+import { SCREEN_NAME } from '../../constants/ScreenName'
+import { IMG_app_logo, IMG_logo1 } from '../../assets/imgs'
+import { AppButton, AppText, AppView, GoogleLoginButton, InputForm } from '../../components'
+import BouncyCheckbox from 'react-native-bouncy-checkbox'
+import { COLORS } from '../../constants/colors'
 import styles from './style'
+
 
 const Login = () => {
 
-    const [Account, setAccount] = useState('')
-    const [Password, setPassword] = useState('')
+    const [Account, setAccount] = useState('');
+    const [Password, setPassword] = useState('');
+    const [SavePassToggle, setSavePassToggle] = useState(false);
     const navigation = useNavigation();
 
     const handleLogin = () => {
@@ -31,47 +35,63 @@ const Login = () => {
             .catch(Error => console.log(Error))
     }
 
-    const renderContentImgOfBtn = () => {
-        return (
-            <>
-                <Image style={styles.styleGGlogo} source={IC_Logo_Google} />
-                <AppText style={styles.loginGGFont}>Sign in with Google</AppText>
-            </>
-        )
+    const handleLoginGoogle = () => {
+
     }
 
     return (
         <AppView type={APP_VIEW_TYPE.SCROLL_VIEW} style={styles.container}>
             <AppView style={styles.logo}>
-                <Image source={IMG_app_Logo} />
+                <Image source={IMG_logo1} />
+                <Image style={styles.logo_app} source={IMG_app_logo} />
             </AppView>
-            <InputForm
-                label={'Tài Khoản'}
-                placeholder={'Nhập Tài Khoản'}
-                setText={(text) => setAccount(text)}
-            />
-            <InputForm
-                label={'Mật Khẩu'}
-                placeholder={'Nhập Mật Khẩu'}
-                setText={(text) => setPassword(text)}
-            />
-            <AppButton
-                styleButton={styles.LoginBtn}
-                content={'Đăng Nhập'}
-                styleContent={styles.loginFont}
-                onPressButton={handleLogin}
-            />
-            <AppButton
-                styleButton={[styles.LoginBtn, styles.LoginBtnGG]}
-                content={renderContentImgOfBtn}
-                styleContent={styles.loginGoogleContent}
-            />
-            <AppButton
-                styleButton={styles.CreatBtn}
-                content={'Đăng kí ?'}
-                styleContent={styles.CreatBtnFont}
-                onPressButton={() => navigation.navigate(SCREEN_NAME.CREAT_ACCOUNT)}
-            />
+            <AppView style={styles.input_group}>
+                <InputForm
+                    style={styles.inputform}
+                    label={'Tài Khoản'}
+                    placeholder={'Nhập Tài Khoản'}
+                    setText={(text) => setAccount(text)}
+                />
+                <InputForm
+                    style={styles.inputform}
+                    label={'Mật Khẩu'}
+                    placeholder={'Nhập Mật Khẩu'}
+                    setText={(text) => setPassword(text)}
+                />
+            </AppView>
+            <AppView style={styles.savepass_group}>
+                <BouncyCheckbox
+                    size={16}
+                    fillColor={COLORS.OUTER_SPACE}
+                    text="Lưu mật khẩu"
+                    textStyle={[{ textDecorationLine: 'none' }, styles.save_pass_font]}
+                    iconStyle={{ borderRadius: 2 }}
+                    innerIconStyle={{ borderRadius: 2 }}
+                    onPress={({ isChecked }) => setSavePassToggle(isChecked)}
+                />
+                <AppButton
+                    content={'Quên mật khẩu'}
+                    styleContent={styles.save_pass_font}
+                />
+            </AppView>
+            <AppView style={styles.button_group}>
+                <AppButton
+                    type={APP_BUTTON_TYPE.LOGIN}
+                    content={'Đăng Nhập'}
+                    styleContent={styles.loginFont}
+                    onPressButton={handleLogin}
+                />
+                <AppView style={styles.space} />
+                <GoogleLoginButton onPress={handleLoginGoogle} />
+            </AppView>
+            <AppView style={styles.footer_group}>
+                <AppText style={styles.footer_text}>Bạn chưa có tài khoản?</AppText>
+                <AppButton
+                    content={' Đăng kí'}
+                    styleContent={styles.register_button_content}
+                    onPressButton={() => navigation.navigate(SCREEN_NAME.CREAT_ACCOUNT)}
+                />
+            </AppView>
         </AppView>
     )
 }

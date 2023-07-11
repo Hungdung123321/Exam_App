@@ -12,7 +12,8 @@ const InputForm = (props) => {
         styleInput,
         placeholder,
         regex = null,
-        invaildMessage
+        invaildMessage,
+        style
     } = props;
     const [validationMessage, setValidationMessage] = useState('');
 
@@ -33,12 +34,11 @@ const InputForm = (props) => {
     };
 
     return (
-        <AppView style={styles.container}>
+        <AppView style={[styles.container, style]}>
             <AppText
                 style={styles.labelDefault}>
                 {label || EMPTY_STRING}
             </AppText>
-            <AppText style={styles.padding} />
             <AppText
                 style={styleInput}
                 TYPE={APP_TEXT_TYPE.TEXT_INPUT}
